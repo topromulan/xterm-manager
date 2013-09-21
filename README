@@ -18,3 +18,6 @@ A couple of example are included in ./box/
 For example the localhost one overrides the command to just start bash instead
 of ssh.
 
+The main point is to bind them to keyboard shortcuts in the desktop and quickly
+fire off familiar colored terminals representing the different stations. It's 
+kind of similar to PuTTY's sessions.
