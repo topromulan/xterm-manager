@@ -1,0 +1,20 @@
+
+I use a script like this to make it easier to manage a lot of xterm configs
+that are mostly ssh to unix boxes.
+
+For example put it as ~/x/box.sh and create directory ~/x/box/
+
+Start the script with the argument of the name of the config file
+
+For example
+
+~/x/box.sh bud
+~/x/box.sh fan
+
+These would load the settings in ~/x/box/bud.txt or ~/x/box/fan.txt respectively
+
+A couple of example are included in ./box/
+
+For example the localhost one overrides the command to just start bash instead
+of ssh.
+

@@ -1,0 +1,7 @@
+
+COMMAND=/bin/bash
+
+FG=WHITE
+BG=BLACK
+
+TITLE=XTerm
