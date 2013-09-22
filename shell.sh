@@ -6,11 +6,10 @@ LOCATION=`echo $0 | sed 's/[^\/]*$//'`
 SUBDIR=shells
 TXT=$HOST.txt
 
-cd $LOCATION/$SUBDIR
-# The directory containing .txt files named after the hosts which
-#  may override these default settings below.
+# The piggy-back directory LOCATION/SUBDIR contains .txt files named after the
+# hosts/programs which may override these default settings below.
 
-if [ ! -f $TXT ]
+if [ ! -f $LOCATION/$SUBDIR/$TXT ]
 then
 	logger -sp local0.error "shell $TXT not found"
 	exit 1
@@ -26,6 +25,6 @@ FG=WHITE
 
 FONT=9x15
 
-source $TXT
+source $LOCATION/$SUBDIR/$TXT
 
 xterm -bg $BG -fg $FG -font $FONT -title "$TITLE" -e "$COMMAND $ARGS"
