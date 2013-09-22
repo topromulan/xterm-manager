@@ -3,7 +3,7 @@
 HOST="$1"
 
 LOCATION=`echo $0 | sed 's/[^\/]*$//'`
-SUBDIR=box
+SUBDIR=shells
 TXT=$HOST.txt
 
 cd $LOCATION/$SUBDIR
@@ -12,14 +12,14 @@ cd $LOCATION/$SUBDIR
 
 if [ ! -f $TXT ]
 then
-	logger -sp local0.error "box $TXT not found"
+	logger -sp local0.error "shell $TXT not found"
 	exit 1
 fi
 
 COMMAND=ssh
 ARGS=""
 
-TITLE="$HOST (box)"
+TITLE="$HOST (shell)"
 
 BG=BLACK
 FG=WHITE
