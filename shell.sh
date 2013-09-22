@@ -24,7 +24,10 @@ BG=BLACK
 FG=WHITE
 
 FONT=9x15
+GEOM=80x36
 
+# User provided settings
 source $LOCATION/$SUBDIR/$TXT
 
-xterm -bg $BG -fg $FG -font $FONT -title "$TITLE" -e "$COMMAND $ARGS"
+# Launch the proposed terminal
+xterm -bg $BG -fg $FG -font $FONT -geom $GEOM -title "$TITLE" -e "$COMMAND $ARGS"

@@ -1,5 +1,5 @@
 
 ARGS="dra@fan"
 
-FG="#22CC22"
+FG="#AACCAA"
 BG="#AAAAAA"

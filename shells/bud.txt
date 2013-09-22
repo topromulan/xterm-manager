@@ -1,5 +1,5 @@
 
 ARGS="dra@bud"
 
-FG="#CC2222"
+FG="#CCAAAA"
 BG="#888888"
