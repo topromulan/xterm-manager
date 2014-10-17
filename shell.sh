@@ -1,33 +1,43 @@
 #!/bin/bash
 
-HOST="$1"
+# Usage: shell [name]
+SHELL_SH_NAME="$1"
 
-LOCATION=`echo $0 | sed 's/[^\/]*$//'`
+# This is a shell script framework for launching console 
+#  applications in XTerm
+
+# The path to each launcher's settings is near, piggy-back off
+#  of the path this script
+SHELL_SH_PATH=`echo $0 | sed 's/[^\/]*$//'`
 SUBDIR=shells
-TXT=$HOST.txt
 
-# The piggy-back directory LOCATION/SUBDIR contains .txt files named after the
-# hosts/programs which may override these default settings below.
+# Some defaults assuming the most common story is ssh to hosts
+[ -z $SHELL_SH_COMMAND ] && SHELL_SH_COMMAND=ssh
+# Arguments specified separately for ease of user maintaining files
+[ -z $SHELL_SH_ARGS ] && SHELL_SH_ARGS=""
 
-if [ ! -f $LOCATION/$SUBDIR/$TXT ]
-then
-	logger -sp local0.error "shell $TXT not found"
-	exit 1
-fi
+[ -z $SHELL_SH_TITLE ] && SHELL_SH_TITLE="$SHELL (shell.sh)"
 
-COMMAND=ssh
-ARGS=""
+[ -z $SHELL_SH_BG ] && SHELL_SH_BG=BLACK
+[ -z $SHELL_SH_FG ] && SHELL_SH_FG=WHITE
 
-TITLE="$HOST (shell)"
+[ -z $SHELL_SH_FONT ] && SHELL_SH_FONT=9x15
+[ -z $SHELL_SH_GEOM ] && SHELL_SH_GEOM=80x36
 
-BG=BLACK
-FG=WHITE
+# Source the user-provided terminal settings for the host
+#source $SHELL_SH_PATH/$SUBDIR/$SHELL_SH_NAME.txt 
+# Doesn't work:
+#. $SHELL_SH_PATH/$SUBDIR/$SHELL_SH_NAME.txt || \
+	#xlogo -bg red & # <-- warns user if failed
+cat $SHELL_SH_PATH/$SUBDIR/$SHELL_SH_NAME.txt | \
+	sed 's/^\([A-Z]\+\)\=/SHELL_SH_\1=/' \
+	> /tmp/shell.txt
+# It might be nice if there was a filesystem type or a path within /proc
+#  or /sys where you could use a constant path but get files unique to your process. But could use a function to pick a unique filename. Not predicting problemswith this.
 
-FONT=9x15
-GEOM=80x36
+[ $? ] || exit 2
 
-# User provided settings
-source $LOCATION/$SUBDIR/$TXT
+source /tmp/shell.txt
 
 # Launch the proposed terminal
-xterm -bg $BG -fg $FG -font $FONT -geom $GEOM -title "$TITLE" -e "$COMMAND $ARGS"
+xterm -bg $SHELL_SH_BG -fg $SHELL_SH_FG -font $SHELL_SH_FONT -geom $SHELL_SH_GEOM -title "$SHELL_SH_TITLE" -e "$SHELL_SH_COMMAND $SHELL_SH_ARGS" 
